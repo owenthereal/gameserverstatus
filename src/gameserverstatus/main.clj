@@ -10,4 +10,5 @@
             :body "Hello World!"}))
 
 (defn -main []
-  (start-http-server hello-world {:port 8080}))
+  (let [port (Integer/parseInt (or (System/getenv "PORT") 8080))]
+    (start-http-server hello-world {:port port})))
