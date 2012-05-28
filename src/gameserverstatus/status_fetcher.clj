@@ -1,4 +1,4 @@
-(ns gameserverstatus.main
+(ns gameserverstatus.status-fetcher
   (:require [gameserverstatus.games.d3 :as d3]))
 
 (defn -main []
