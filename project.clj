@@ -2,6 +2,6 @@
             :description "FIXME: write description"
             :dependencies [[org.clojure/clojure "1.4.0"]
                            [org.clojure/data.json "0.1.3"]
-                           [aleph "0.3.0-alpha2"]
+                           [noir "1.2.2"]
                            [enlive "1.0.0"]]
-            :main gameserverstatus.main)
+            :main gameserverstatus.server)
