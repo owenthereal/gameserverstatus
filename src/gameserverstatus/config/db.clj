@@ -1,21 +1,22 @@
-(ns gameserverstatus.config.db
-  (:use [aleph redis]))
+(ns gameserverstatus.config.db)
 
-(def redis-to-go-uri (System/getenv "REDISTOGO_URL"))
-
-(defn parse-redis-uri [uri]
-  (let [uri (bean (java.net.URI. uri))
-        host (uri :host)
-        port (uri :port)
+(defn- to-db-spec [db-uri]
+  (let [uri (bean (java.net.URI. db-uri))
+        subprotocol (uri :scheme)
+        subname (uri schemeSpecificPart)
+        user-info (uri :userInfo)
         user-info (clojure.string/split (uri :userInfo)
                                         #":")
+        user (first user-info)
         password (last user-info)]
-    {:host host
-     :port port
-     :password password}))
+    {:subprotocol scheme
+     :subname schemeSpecificPart
+     :user "clojure_test"
+     :password "clojure_test"}))
 
-(def redis-options
-  (if redis-to-go-uri
-    (parse-redis-uri redis-to-go-uri)))
+(def db-uri (get (System/getenv)
+                 "DATABASE_URL"
+                 "postgresql://localhost:5432/gameserverstatus"))
 
-(def redis (redis-client redis-options))
+(def db-spec
+  (to-db-spec db-uri))

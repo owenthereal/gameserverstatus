@@ -1,5 +1,9 @@
 (ns gameserverstatus.models.status
-  (:require [clojure.string :as str]))
+  (:use [korma.db])
+  (:require [clojure.string :as str])
+  (:require [gameserverstatus.config.db :as config]))
+
+(defdb db (postgres config/db-spec))
 
 (defn hyphenate [word]
   (-> word
